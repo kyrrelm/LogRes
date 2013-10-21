@@ -48,18 +48,34 @@ public class Board {
 		return true;
 	}
 	
-	public boolean get(int with, int height) {
-		return board[height][width];
-	}
-	
-	public int getHeight() {
-		return height;
-	}
-	public int getWidth() {
-		return width;
-	}
-	
 	public double evaluate() {
 		return Math.random();
 	}
+	public boolean isDiagonalLegalBottomToTop(int height, int width){
+		return true;
+//		int count = 0;
+//		if(height == 0){
+//			for (int i = 0; i <= Math.min(height, width); i++) {
+//				if(board[i][width-i])
+//					count++;
+//			}
+//		}
+//		
+//		int ii = width;
+//		int uu = height;
+//		if(height > width) {
+//			ii = height;
+//			uu = width;
+//		}
+//		
+//		for(int u=0; u<=ii;u++) {
+//			count = 0;
+//			for(int j=0+u, i=0; i+u<height; i++, j++) {
+//				if(board[i][j+u])
+//					count++;
+//				if(count>2) {
+//					return false;
+//				}
+//			}
+		}
 }
