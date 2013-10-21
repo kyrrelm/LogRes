@@ -3,25 +3,50 @@ package oving4;
 public class Board {
 
 	
-	private final int width;
-	private final int height;
+	private final int lengthOfSides;
 	private final int maxNumberOfEggs;
 	private boolean[][] board;
+	private final int maxScore;
+	private final int penaltyModifier;
 
-	public Board(int width, int height, int maxNumberOfEggs){
-		this.width = width;
-		this.height = height;
+	public Board(int lengthOfSides, int maxNumberOfEggs, int penaltyModifier){
+		this.lengthOfSides = lengthOfSides;
 		this.maxNumberOfEggs = maxNumberOfEggs;
-		board = new  boolean[height][width]; 
+		board = new boolean[lengthOfSides][lengthOfSides];
+		this.maxScore = lengthOfSides*maxNumberOfEggs;
+		this.penaltyModifier = penaltyModifier;
+		
+		
 	}
-	public void insertEgg(int width, int height){
-		board[height][width] = true;
+	public void setEgg(int width, int height, boolean b){
+		board[height][width] = b;
 	}
-	public void removeEgg(int width, int height){
-		board[height][width] = false;
-	}
-	public boolean hasEgg(int width, int height){
+	public boolean isEgg(int width, int height){
 		return board[height][width];
+	}
+	public double evaluate() {
+		return (getNumberOfEggs()-calculateNumberOfFaults()*penaltyModifier)/maxNumberOfEggs;
+	}
+	private int getNumberOfEggs() {
+		int n = 0;
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++) {
+				if (board[i][j]) {
+					n++;
+				}
+			}
+		}
+		return n;
+	}
+	private int calculateNumberOfFaults(){
+		int numberOfFaults = 0;
+		for (int i = 0; i < board.length; i++) {
+			if (!isColumnLegal(i))
+				numberOfFaults++;
+			if (!isRowLegal(i))
+				numberOfFaults++;
+		}
+		return numberOfFaults;
 	}
 	public boolean isColumnLegal(int column){
 		int count = 0;
@@ -47,11 +72,7 @@ public class Board {
 		}
 		return true;
 	}
-	
-	public double evaluate() {
-		return Math.random();
-	}
-	public boolean isDiagonalLegalBottomToTop(int height, int width){
+	public boolean isDiagonalLegal(int height, int width){
 		return true;
 //		int count = 0;
 //		if(height == 0){
