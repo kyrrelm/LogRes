@@ -47,6 +47,10 @@ public class Board {
 		}
 		return true;
 	}
+	
+	public double evaluate() {
+		return Math.random();
+	}
 	public boolean isDiagonalLegalBottomToTop(int height, int width){
 		return true;
 //		int count = 0;
@@ -73,6 +77,5 @@ public class Board {
 //					return false;
 //				}
 //			}
-//		}
-	}
+		}
 }
