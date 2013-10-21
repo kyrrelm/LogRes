@@ -21,6 +21,10 @@ public class Node {
 		this.egg = egg;
 	}
 	
+	public void invert() {
+		this.egg = !egg;
+	}
+	
 	public int[] getLocation() {
 		int[] loc = new int[2];
 		loc[0] = x;
