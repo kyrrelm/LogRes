@@ -5,13 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Simulator {
-	
-	private BufferedReader reader;
-	
-	public static void main(String[]args) {
-		//TODO
-	}
-	
+			
+	public Simulator() {}
+
 	/**
 	 * Support class for reading an int
 	 * @param reader	The BufferedReader that'll be used.
@@ -27,9 +23,10 @@ public class Simulator {
 		}
 	}
 	
-	public Simulator() {
-		reader = new BufferedReader(new InputStreamReader(System.in));
-		//Read shit
+	public static void main(String[]args) {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+		//Read shit the shit
 		System.out.print("Input the number of rows: ");
 		int rows = readInt(reader);
 		System.out.println();
@@ -41,26 +38,28 @@ public class Simulator {
 		System.out.print("Maximum number of eggs per row/column/diagonal: ");
 		int max = readInt(reader);
 		System.out.println();
-		
-		boolean[][] array = new boolean[rows][columns];
-		
+
 		//Close the bufferedreader
 		try {
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		Board board = new Board(rows, columns, max);
 		
+		
+
 	}
-	/**
-	 * Skal vi gidde? kanskje?
-	 */
-	public void guiPrint(Board solution) {
+	
+	public static void guiPrint(Board solution) {
 		//TODO
 	}
 	
-	public void lamePrint(Board solution) {
+	public static void lamePrint(Board solution) {
 		//TODO
 	}
+	
+
 
 }
