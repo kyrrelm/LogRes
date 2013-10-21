@@ -10,7 +10,7 @@ public class Logic {
 	
 	
 	public void saAlgEggs() {
-		boolean current = board.get(0,0);
+		Board best = board;
 		int temp = 500;
 		while(true) {
 			temp--;
