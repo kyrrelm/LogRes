@@ -5,37 +5,25 @@ public class Board {
 	
 	private final int lengthOfSides;
 	private final int maxNumberOfEggs;
-	private Node[][] board;
+	private boolean[][] board;
 	private final int maxScore;
 	private final int penaltyModifier;
 
 	public Board(int lengthOfSides, int maxNumberOfEggs, int penaltyModifier){
 		this.lengthOfSides = lengthOfSides;
 		this.maxNumberOfEggs = maxNumberOfEggs;
-		populateBoard();
+		board = new boolean[lengthOfSides][lengthOfSides];
 		this.maxScore = lengthOfSides*maxNumberOfEggs;
 		this.penaltyModifier = penaltyModifier;
 		
 		
 	}
-	private void populateBoard() {
-		for (int i = 0; i < lengthOfSides; i++) {
-			for (int j = 0; j < lengthOfSides; j++) {
-				board[i][j] = new Node(i, j);
-			}
-			
-		}
+	public void setEgg(int width, int height, boolean b){
+		board[height][width] = b;
 	}
-	public void setNode(int width, int height, Node n){
-		board[height][width] = n;
-	}
-	public Node getNode(int width, int height){
+	public boolean isEgg(int width, int height){
 		return board[height][width];
 	}
-	public boolean hasEgg(int width, int height){
-		return board[height][width].isEgg();
-	}
-	
 	public double evaluate() {
 		return (getNumberOfEggs()-calculateNumberOfFaults()*penaltyModifier)/maxNumberOfEggs;
 	}
@@ -43,7 +31,7 @@ public class Board {
 		int n = 0;
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board.length; j++) {
-				if (hasEgg(i, j)) {
+				if (board[i][j]) {
 					n++;
 				}
 			}
@@ -63,7 +51,7 @@ public class Board {
 	public boolean isColumnLegal(int column){
 		int count = 0;
 		for (int i = 0; i < board.length; i++) {
-			if (board[i][column].isEgg()) {
+			if (board[i][column]) {
 				count++;
 			}
 		}
@@ -75,7 +63,7 @@ public class Board {
 	public boolean isRowLegal(int row){
 		int count = 0;
 		for (int i = 0; i < board[row].length; i++) {
-			if (board[row][i].isEgg()) {
+			if (board[row][i]) {
 				count++;
 			}
 		}
