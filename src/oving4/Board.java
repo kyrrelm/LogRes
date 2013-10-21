@@ -47,4 +47,19 @@ public class Board {
 		}
 		return true;
 	}
+	
+	public boolean get(int with, int height) {
+		return board[height][width];
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	public int getWidth() {
+		return width;
+	}
+	
+	public double evaluate() {
+		return Math.random();
+	}
 }
