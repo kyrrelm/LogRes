@@ -124,7 +124,7 @@ public class Board implements Cloneable {
 
 	
 	
-	public void invertEgg(int x, int y) {
+	public void flipEgg(int x, int y) {
 		board[y][x] = !board[y][x];
 	}
 	
