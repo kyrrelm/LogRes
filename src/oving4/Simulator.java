@@ -33,7 +33,6 @@ public class Simulator {
 		//Read shit the shit
 		System.out.print("Input the number of rows and columns: ");
 		int sides = readInt(reader);
-		System.out.println();
 		
 		System.out.print("Maximum number of eggs per row/column/diagonal: ");
 		int max = readInt(reader);
