@@ -15,7 +15,7 @@ public class Logic {
 	// The global values used.
 	private final double penaltyModifier = 1.5;
 	private final int dTemp = 1;
-	private final int tempMax = 2000;
+	private final int tempMax = 5000;
 	
 	
 	public Logic(int sides, int maxNumberOfEggs){
@@ -71,6 +71,43 @@ public class Logic {
 		return best;
 	}
 	
+	public Board penisKuk() {
+		Board current = board;
+		Board best = board;
+//		double fCurrent = current.evaluate();
+		int t = tempMax;
+		double q;
+		while(current.evaluate() < 1 && t>0) {
+			ArrayList<Board> neighbors = getNeighbors(current);
+			//
+			double fpMax = 0;
+			Board pMax = null;
+			for(Board n : neighbors) {
+				double nScore = n.evaluate();
+				if(nScore > fpMax){
+					fpMax = nScore;
+					pMax = n;
+				}
+			}
+			//
+			if(fpMax > current.evaluate())
+				best = pMax;
+			q = neighbors.get(0).evaluate()-current.evaluate();
+			double temp = (double)t/100 - q;
+			double x = Math.random();
+			if(x>temp){
+				current = pMax;
+			} else {
+				current = neighbors.get(random.nextInt(neighbors.size()));
+			}
+			t -= dTemp;
+			System.out.println(current.evaluate());
+		}
+		System.out.println("Score: "+current.evaluate());
+		return best;
+	}
+	
+	
 	public Board saAlgorithm() {
 		System.out.println("Algorithm running...");
 		Board current = board;
@@ -83,7 +120,7 @@ public class Logic {
 			double fpMax = 0;
 			Board pMax = null;
 			for(Board n : neighbors) {
-				double nScore = board.evaluate();
+				double nScore = n.evaluate();
 				if(nScore >= fpMax) {
 					fpMax = nScore;
 					pMax = n;
@@ -93,6 +130,8 @@ public class Logic {
 			double p = (double)tempMax/100 - q;//Math.min(1, Math.pow(Math.E, ((-q)/temp)));
 			double x = Math.random();
 //			System.out.println(x+" - "+p);
+			if(pMax.evaluate()>= current.evaluate())
+				best = pMax;
 			if(x>p) {
 				current = pMax;												//Exploiting
 //				System.out.println("asdfghjk");
@@ -105,7 +144,7 @@ public class Logic {
 				best = current;
 */		}
 		System.out.println("Best:"+ best.evaluate());
-		return current;
+		return best;
 	}
 	
 	/**
@@ -115,7 +154,7 @@ public class Logic {
 	 */
 	public ArrayList<Board> getNeighbors(Board b) {
 		ArrayList<Board> neighbors = new ArrayList<Board>();
-		for(int i=0; i<7; i++) {
+		for(int i=0; i<5; i++) {
 			Board n = null;
 			
 			//Try to clone the Board

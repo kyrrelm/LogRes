@@ -50,7 +50,7 @@ public class Simulator {
 		}
 
 		Logic logic = new Logic(sides, max);
-		Board solution = logic.saAlgorithm();
+		Board solution = logic.penisKuk();
 		lamePrint(solution);
 	}
 	
