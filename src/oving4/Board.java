@@ -118,7 +118,7 @@ public class Board implements Cloneable {
 			return false;
 		return true;
 	}
-/*	public static void main(String[] args) {
+	public static void main(String[] args) {
 		Board b = new Board(5, 2, 2);
 		b.setEgg(3, 0, true);
 		b.setEgg(4, 1, true);
@@ -142,7 +142,7 @@ public class Board implements Cloneable {
 //					return false;
 //				}
 //			}
-*/
+
 	
 	
 	public void flipEgg(int x, int y) {
