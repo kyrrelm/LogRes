@@ -27,9 +27,18 @@ public class Board implements Cloneable {
 	public boolean isEgg(int width, int height){
 		return board[height][width];
 	}
+	
+	/**
+	 * This is the actual object function.
+	 * @return a value between 0.0001 and 1
+	 */
 	public double evaluate() {
 		return (Math.max(((double)getNumberOfEggs()-(double)calculateNumberOfFaults()*penaltyModifier), 0.0001)/(double)maxScore);
 	}
+	/**
+	 * 
+	 * @return number of eggs on the board
+	 */
 	private int getNumberOfEggs() {
 		int n = 0;
 		for (int i = 0; i < board.length; i++) {
@@ -41,6 +50,10 @@ public class Board implements Cloneable {
 		}
 		return n;
 	}
+	/**
+	 * This method calculates the number of violations of max eggs per row/column/diagonal
+	 * @return
+	 */
 	private int calculateNumberOfFaults(){
 		int numberOfFaults = 0;
 		for (int i = 0; i < board.length; i++) {
@@ -58,6 +71,11 @@ public class Board implements Cloneable {
 		}
 		return numberOfFaults;
 	}
+	/**
+	 * Checks if a column is legal
+	 * @param column
+	 * @return
+	 */
 	public boolean isColumnLegal(int column){
 		int count = 0;
 		for (int i = 0; i < board.length; i++) {
@@ -70,6 +88,11 @@ public class Board implements Cloneable {
 		}
 		return true;
 	}
+	/**
+	 * Cheks if a row is legal
+	 * @param row
+	 * @return
+	 */
 	public boolean isRowLegal(int row){
 		int count = 0;
 		for (int i = 0; i < board[row].length; i++) {
@@ -82,6 +105,12 @@ public class Board implements Cloneable {
 		}
 		return true;
 	}
+	/**
+	 * checks if a diagonal going from left down to right is legal
+	 * @param height
+	 * @param width
+	 * @return
+	 */
 	private boolean isDiagonalLegalLeftToRight(int height, int width){
 		int count = 0;
 		if(height == 0){
@@ -100,6 +129,12 @@ public class Board implements Cloneable {
 			return true;
 		return true;
 	}
+	/**
+	 * checks if a diagonal is legal going from right down to left
+	 * @param height
+	 * @param width
+	 * @return
+	 */
 	private boolean isDiagonalLegalRightToLeft(int height, int width){
 		int count = 0;
 		if(height == 0){
@@ -118,32 +153,6 @@ public class Board implements Cloneable {
 			return false;
 		return true;
 	}
-	public static void main(String[] args) {
-		Board b = new Board(5, 2, 2);
-		b.setEgg(3, 0, true);
-		b.setEgg(4, 1, true);
-		b.setEgg(0, 1, true);
-		b.setEgg(0, 3, true);
-		System.out.println(b.evaluate());
-	}
-//		int ii = width;
-//		int uu = height;
-//		if(height > width) {
-//			ii = height;
-//			uu = width;
-//		}
-//		
-//		for(int u=0; u<=ii;u++) {
-//			count = 0;
-//			for(int j=0+u, i=0; i+u<height; i++, j++) {
-//				if(board[i][j+u])
-//					count++;
-//				if(count>2) {
-//					return false;
-//				}
-//			}
-
-	
 	
 	public void flipEgg(int x, int y) {
 		board[y][x] = !board[y][x];
