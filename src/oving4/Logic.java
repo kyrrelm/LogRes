@@ -3,6 +3,8 @@ package oving4;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
 public class Logic {
 	
 	private Board board;
@@ -41,6 +43,34 @@ public class Logic {
 	 * The Simmulated Annealing Algorithm!
 	 * @return	Returns the best board solution found.
 	 */
+	public Board simmulatedAnnealing() {
+		System.out.println("Algorithm running");
+		Board best = board, current = board;
+		for(int temp=500; temp>0; temp--) {
+			ArrayList<Board> neighbors = getNeighbors(current);
+			double fpMax = 0;
+			Board pMax = null;
+			for(Board n : neighbors) {
+				double nScore = board.evaluate();
+				if(nScore > fpMax) {
+					fpMax = nScore;
+					pMax = n;
+				}
+			}
+			double score = pMax.evaluate();
+			if(score <= current.evaluate()){
+				current = pMax;
+				if(pMax.evaluate() <= best.evaluate()) {
+					best = pMax;
+					if(pMax.evaluate() == 1)
+						return pMax;
+				}
+			} else if(((current.evaluate()-pMax.evaluate())/temp)> Math.random())
+				current = neighbors.get(random.nextInt(neighbors.size()));	
+		}
+		return best;
+	}
+	
 	public Board saAlgorithm() {
 		System.out.println("Algorithm running...");
 		Board current = board;
@@ -54,22 +84,22 @@ public class Logic {
 			Board pMax = null;
 			for(Board n : neighbors) {
 				double nScore = board.evaluate();
-				if(nScore > fpMax) {
+				if(nScore >= fpMax) {
 					fpMax = nScore;
 					pMax = n;
 				}
 			}
-			double q = ((fpMax-fP)/fP);
-			double p = Math.min(1, Math.pow(Math.E, ((-q)/temp)));
+			double q = fpMax-fP;//((fpMax-fP)/fP);
+			double p = (double)tempMax/100 - q;//Math.min(1, Math.pow(Math.E, ((-q)/temp)));
 			double x = Math.random();
 //			System.out.println(x+" - "+p);
 			if(x>p) {
 				current = pMax;												//Exploiting
-				System.out.println("asdfghjk");
+//				System.out.println("asdfghjk");
 			}
 			else 
 				current = neighbors.get(random.nextInt(neighbors.size()));	//Exploring
-			temp = temp - dTemp;
+			temp -=dTemp;
 			fP = current.evaluate();
 /*			if(current.evaluate() > best.evaluate())
 				best = current;
