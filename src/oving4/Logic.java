@@ -70,8 +70,8 @@ public class Logic {
 			case 0: { n.setEgg(random.nextInt(sides), random.nextInt(sides), true);	} 			//Place 2 eggs
 			case 1: {} 																			//Place 1 egg
 			case 2: { n.setEgg(random.nextInt(sides), random.nextInt(sides), true); break; }	//Place 1 egg
-			case 3: { n.invertEgg(random.nextInt(sides), random.nextInt(sides));	} 			//Inverse 2 eggs
-			default: {n.invertEgg(random.nextInt(sides), random.nextInt(sides)); 	} 			//Inverse 1 egg
+			case 3: { n.flipEgg(random.nextInt(sides), random.nextInt(sides));	} 			//Inverse 2 eggs
+			default: {n.flipEgg(random.nextInt(sides), random.nextInt(sides)); 	} 			//Inverse 1 egg
 			}
 			neighbors.add(n);
 		}
