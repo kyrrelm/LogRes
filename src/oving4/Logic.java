@@ -11,9 +11,9 @@ public class Logic {
 	private int sides;
 	
 	// The global values used.
-	private final int penaltyModifier = 3;
+	private final int penaltyModifier = 2;
 	private final int dTemp = 1;
-	private final int tempMax = 500;
+	private final int tempMax = 50000;
 	
 	
 	public Logic(int sides, int maxNumberOfEggs){
@@ -29,10 +29,11 @@ public class Logic {
 	public Board saAlgorithm() {
 		System.out.println("Algorithm running...");
 		Board current = board;
+		Board best = current;
 		int temp = tempMax;
 		double fP = current.evaluate();
 		while(fP < 1 && temp != 0) {
-//			System.out.println(fP);
+			System.out.println(fP);
 			ArrayList<Board> neighbors = getNeighbors(current);
 			double fpMax = 0;
 			Board pMax = null;
@@ -43,17 +44,25 @@ public class Logic {
 					pMax = n;
 				}
 			}
-			double q = ((fpMax-fP)/fP);
+/*			if(fP==0.0)
+				fP=0.0001;
+*/			double q = ((fpMax-fP)/fP);
 			double p = Math.min(1, Math.pow(Math.E, ((-q)/temp)));
 			double x = Math.random();
-			if(x>p)
-				current = pMax;												//Exploiting
+//			System.out.println(x+" - "+p);
+			if(x>p) {
+				current = pMax;	
+				System.out.println("asdfghjk");//Exploiting
+			}
 			else 
 				current = neighbors.get(random.nextInt(neighbors.size()));	//Exploring
 			temp = temp - dTemp;
 			fP = current.evaluate();
+			if(current.evaluate() > best.evaluate())
+				best = current;
 		}
-		return current;
+		System.out.println("Best:"+ best.evaluate());
+		return best;
 	}
 	
 	/**
@@ -73,8 +82,11 @@ public class Logic {
 				System.out.println("Fail! Hva skjer?");
 				e.printStackTrace();
 			}
+
+			
+			
 			//Generate semi-random neighbors.
-			switch(i) {
+/*			switch(i) {
 			case 0: { n.setEgg(random.nextInt(sides), random.nextInt(sides), false); break;	} 	//remove 1 egg (if exists)
 			case 1: {} 																			//Place 1 egg
 			case 2: { n.setEgg(random.nextInt(sides), random.nextInt(sides), true); break; }	//Place 1 egg
@@ -82,7 +94,7 @@ public class Logic {
 			default: {n.flipEgg(random.nextInt(sides), random.nextInt(sides)); 	} 				//Inverse 1 egg
 			}
 			neighbors.add(n);
-		}
+*/		}
 		return neighbors;	
 	}
 
