@@ -64,8 +64,8 @@ public class Logic {
 			double x = Math.random();
 //			System.out.println(x+" - "+p);
 			if(x>p) {
-				current = pMax;	
-				System.out.println("asdfghjk");//Exploiting
+				current = pMax;												//Exploiting
+				System.out.println("asdfghjk");
 			}
 			else 
 				current = neighbors.get(random.nextInt(neighbors.size()));	//Exploring
