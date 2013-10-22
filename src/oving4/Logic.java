@@ -20,18 +20,16 @@ public class Logic {
 		this.board = new Board(sides, maxNumberOfEggs, penaltyModifier);
 		this.sides = sides;
 		random = new Random();
-		generateBoard(board);
-		
+		generateBoard();
 	}
 	
-	public void generateBoard(Board b){
-		System.out.println(board.getMaxScore());
+	public void generateBoard(){
 		for(int i=0; i<board.getMaxScore(); i++) {
 			while(true) {
 				int r1 = random.nextInt(sides);
 				int r2 = random.nextInt(sides);
-				if(b.isEgg(r1, r2)) {
-					b.setEgg(r1, r2, true);
+				if(!board.isEgg(r1, r2)) {
+					board.setEgg(r1, r2, true);
 					break;
 				}	
 			}
