@@ -26,6 +26,7 @@ public class Logic {
 	 * @return	Returns the best board solution found.
 	 */
 	public Board saAlgorithm() {
+		System.out.println("Algorithm running...");
 		Board current = board;
 		int temp = tempMax;
 		double fP = current.evaluate();
@@ -48,6 +49,7 @@ public class Logic {
 			else 
 				current = neighbors.get(random.nextInt(neighbors.size()));	//Exploring
 			temp = temp - dTemp;
+			fP = current.evaluate();
 		}
 		return current;
 	}
