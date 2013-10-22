@@ -52,6 +52,9 @@ public class Board implements Cloneable {
 				numberOfFaults++;
 			if (i > 0 && !isDiagonalLegalRightToLeft(i, board[0].length-1))
 				numberOfFaults++;
+			if (!isDiagonalLegalLeftToRight(0, i))
+				numberOfFaults++;
+			if (i > 0 && !isDiagonalLegalLeftToRight(i, 0));
 		}
 		return numberOfFaults;
 	}
@@ -79,7 +82,23 @@ public class Board implements Cloneable {
 		}
 		return true;
 	}
-	public boolean isDiagonalLegalRightToLeft(int height, int width){
+	private boolean isDiagonalLegalLeftToRight(int height, int width){
+		int count = 0;
+		if(height == 0){
+			for (int i = 0; i < board.length-width; i++) {
+				if(board[i][width+i])
+					count++;
+			}
+		}else{
+			for (int i = 0; i < board.length-height; i++) {
+				if (board[height+i][i]) {
+					count++;
+				}
+			}
+		}
+		return true;
+	}
+	private boolean isDiagonalLegalRightToLeft(int height, int width){
 		int count = 0;
 		if(height == 0){
 			for (int i = 0; i <= width; i++) {
@@ -126,6 +145,10 @@ public class Board implements Cloneable {
 	
 	public void flipEgg(int x, int y) {
 		board[y][x] = !board[y][x];
+	}
+	
+	public boolean[][] getArray(){
+		return board;
 	}
 	
 	@Override
