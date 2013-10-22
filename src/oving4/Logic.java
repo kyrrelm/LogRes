@@ -49,8 +49,8 @@ public class Logic {
 	}
 	
 	/**
-	 * 
-	 * @param b
+	 * Generates semi-random neighbors from the given board
+	 * @param b		The board the
 	 * @return
 	 */
 	public ArrayList<Board> getNeighbors(Board b) {
