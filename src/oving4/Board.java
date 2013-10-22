@@ -1,8 +1,9 @@
 package oving4;
 
-import javax.swing.border.Border;
+import java.io.Serializable;
 
-public class Board {
+public class Board implements Cloneable {
+
 
 	
 	private final int lengthOfSides;
@@ -120,4 +121,15 @@ public class Board {
 //					return false;
 //				}
 //			}
+
+	
+	
+	public void invertEgg(int x, int y) {
+		board[y][x] = !board[y][x];
+	}
+	
+	@Override
+	protected Board clone() throws CloneNotSupportedException {
+		return (Board) super.clone();
+	}
 }
