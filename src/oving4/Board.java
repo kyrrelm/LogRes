@@ -96,6 +96,8 @@ public class Board implements Cloneable {
 				}
 			}
 		}
+		if(count > maxNumberOfEggs)
+			return true;
 		return true;
 	}
 	private boolean isDiagonalLegalRightToLeft(int height, int width){
@@ -112,7 +114,7 @@ public class Board implements Cloneable {
 				}
 			}
 		}
-		if (count > 2)
+		if (count > maxNumberOfEggs)
 			return false;
 		return true;
 	}
