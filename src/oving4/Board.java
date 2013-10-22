@@ -28,7 +28,7 @@ public class Board implements Cloneable {
 		return board[height][width];
 	}
 	public double evaluate() {
-		return (Math.max(((double)getNumberOfEggs()-(double)calculateNumberOfFaults()*penaltyModifier), 0)/(double)maxScore);
+		return (Math.max(((double)getNumberOfEggs()-(double)calculateNumberOfFaults()*penaltyModifier), 0.0001)/(double)maxScore);
 	}
 	private int getNumberOfEggs() {
 		int n = 0;
