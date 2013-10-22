@@ -10,7 +10,8 @@ public class Logic {
 	
 	private int sides;
 	
-	private final int penaltyModifier = 1;
+	// The global values used.
+	private final int penaltyModifier = 3;
 	private final int dTemp = 1;
 	private final int tempMax = 500;
 	
@@ -20,7 +21,10 @@ public class Logic {
 		this.sides = sides;
 	}
 	
-	
+	/**
+	 * The Simmulated Annealing Algorithm!
+	 * @return	Returns the best board solution found.
+	 */
 	public Board saAlgorithm() {
 		Board current = board;
 		int temp = tempMax;
@@ -40,9 +44,9 @@ public class Logic {
 			double p = Math.min(1, Math.pow(Math.E, ((-q)/temp)));
 			double x = Math.random();
 			if(x>p)
-				current = pMax;
+				current = pMax;												//Exploiting
 			else 
-				current = neighbors.get(random.nextInt(neighbors.size()));
+				current = neighbors.get(random.nextInt(neighbors.size()));	//Exploring
 			temp = temp - dTemp;
 		}
 		return current;
@@ -50,8 +54,8 @@ public class Logic {
 	
 	/**
 	 * Generates semi-random neighbors from the given board
-	 * @param b		The board the
-	 * @return
+	 * @param b		The board the neigbors will be generated from
+	 * @return		An ArrayList containing the neighbors
 	 */
 	public ArrayList<Board> getNeighbors(Board b) {
 		ArrayList<Board> neighbors = new ArrayList<Board>();
@@ -70,13 +74,12 @@ public class Logic {
 			case 0: { n.setEgg(random.nextInt(sides), random.nextInt(sides), true);	} 			//Place 2 eggs
 			case 1: {} 																			//Place 1 egg
 			case 2: { n.setEgg(random.nextInt(sides), random.nextInt(sides), true); break; }	//Place 1 egg
-			case 3: { n.invertEgg(random.nextInt(sides), random.nextInt(sides));	} 			//Inverse 2 eggs
-			default: {n.invertEgg(random.nextInt(sides), random.nextInt(sides)); 	} 			//Inverse 1 egg
+			case 3: { n.flipEgg(random.nextInt(sides), random.nextInt(sides));	} 			//Inverse 2 eggs
+			default: {n.flipEgg(random.nextInt(sides), random.nextInt(sides)); 	} 			//Inverse 1 egg
 			}
 			neighbors.add(n);
 		}
-		return neighbors;
-		
+		return neighbors;	
 	}
 
 }
