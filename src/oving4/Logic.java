@@ -19,6 +19,7 @@ public class Logic {
 	public Logic(int sides, int maxNumberOfEggs){
 		this.board = new Board(sides, maxNumberOfEggs, penaltyModifier);
 		this.sides = sides;
+		random = new Random();
 	}
 	
 	/**
@@ -26,10 +27,12 @@ public class Logic {
 	 * @return	Returns the best board solution found.
 	 */
 	public Board saAlgorithm() {
+		System.out.println("Algorithm running...");
 		Board current = board;
 		int temp = tempMax;
 		double fP = current.evaluate();
-		while(fP >= 1) {
+		while(fP < 1 && temp != 0) {
+			System.out.println(fP);
 			ArrayList<Board> neighbors = getNeighbors(current);
 			double fpMax = 0;
 			Board pMax = null;
@@ -48,6 +51,7 @@ public class Logic {
 			else 
 				current = neighbors.get(random.nextInt(neighbors.size()));	//Exploring
 			temp = temp - dTemp;
+			fP = current.evaluate();
 		}
 		return current;
 	}
