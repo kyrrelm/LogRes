@@ -11,16 +11,33 @@ public class Logic {
 	private int sides;
 	
 	// The global values used.
-	private final int penaltyModifier = 2;
+	private final double penaltyModifier = 1.5;
 	private final int dTemp = 1;
-	private final int tempMax = 50000;
+	private final int tempMax = 2000;
 	
 	
 	public Logic(int sides, int maxNumberOfEggs){
 		this.board = new Board(sides, maxNumberOfEggs, penaltyModifier);
 		this.sides = sides;
 		random = new Random();
+		generateBoard(board);
+		
 	}
+	
+	public void generateBoard(Board b){
+		System.out.println(board.getMaxScore());
+		for(int i=0; i<board.getMaxScore(); i++) {
+			while(true) {
+				int r1 = random.nextInt(sides);
+				int r2 = random.nextInt(sides);
+				if(b.isEgg(r1, r2)) {
+					b.setEgg(r1, r2, true);
+					break;
+				}	
+			}
+		}
+	}
+	
 	
 	/**
 	 * The Simmulated Annealing Algorithm!
@@ -44,9 +61,7 @@ public class Logic {
 					pMax = n;
 				}
 			}
-/*			if(fP==0.0)
-				fP=0.0001;
-*/			double q = ((fpMax-fP)/fP);
+			double q = ((fpMax-fP)/fP);
 			double p = Math.min(1, Math.pow(Math.E, ((-q)/temp)));
 			double x = Math.random();
 //			System.out.println(x+" - "+p);
@@ -58,11 +73,11 @@ public class Logic {
 				current = neighbors.get(random.nextInt(neighbors.size()));	//Exploring
 			temp = temp - dTemp;
 			fP = current.evaluate();
-			if(current.evaluate() > best.evaluate())
+/*			if(current.evaluate() > best.evaluate())
 				best = current;
-		}
+*/		}
 		System.out.println("Best:"+ best.evaluate());
-		return best;
+		return current;
 	}
 	
 	/**
@@ -82,8 +97,31 @@ public class Logic {
 				System.out.println("Fail! Hva skjer?");
 				e.printStackTrace();
 			}
-
 			
+			//Find a random egg.
+			int eggX = 0;
+			int eggY = 0;
+			while(true){
+				int rx = random.nextInt(sides);
+				int ry = random.nextInt(sides);
+				if(n.isEgg(rx, ry)){
+					eggX = rx;
+					eggY = ry;
+					break;
+				}
+			}
+			
+			//Try to find a legal move.
+			while(true) {
+				int r1 = random.nextInt(sides);
+				int r2 = random.nextInt(sides);
+				if(!n.isEgg(r1, r2)) {
+					n.setEgg(r1, r2, true);
+					n.setEgg(eggX, eggY, false);
+					break;
+				}	
+			}
+			neighbors.add(n);
 			
 			//Generate semi-random neighbors.
 /*			switch(i) {
@@ -97,5 +135,4 @@ public class Logic {
 */		}
 		return neighbors;	
 	}
-
 }
