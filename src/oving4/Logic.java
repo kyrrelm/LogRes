@@ -32,7 +32,7 @@ public class Logic {
 		int temp = tempMax;
 		double fP = current.evaluate();
 		while(fP < 1 && temp != 0) {
-			System.out.println(fP);
+//			System.out.println(fP);
 			ArrayList<Board> neighbors = getNeighbors(current);
 			double fpMax = 0;
 			Board pMax = null;
@@ -75,11 +75,11 @@ public class Logic {
 			}
 			//Generate semi-random neighbors.
 			switch(i) {
-			case 0: { n.setEgg(random.nextInt(sides), random.nextInt(sides), true);	} 			//Place 2 eggs
+			case 0: { n.setEgg(random.nextInt(sides), random.nextInt(sides), false); break;	} 	//remove 1 egg (if exists)
 			case 1: {} 																			//Place 1 egg
 			case 2: { n.setEgg(random.nextInt(sides), random.nextInt(sides), true); break; }	//Place 1 egg
-			case 3: { n.flipEgg(random.nextInt(sides), random.nextInt(sides));	} 			//Inverse 2 eggs
-			default: {n.flipEgg(random.nextInt(sides), random.nextInt(sides)); 	} 			//Inverse 1 egg
+			case 3: { n.flipEgg(random.nextInt(sides), random.nextInt(sides));	} 				//Inverse 2 eggs
+			default: {n.flipEgg(random.nextInt(sides), random.nextInt(sides)); 	} 				//Inverse 1 egg
 			}
 			neighbors.add(n);
 		}
