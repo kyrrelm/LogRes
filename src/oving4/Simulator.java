@@ -25,39 +25,45 @@ public class Simulator {
 		}
 	}
 	
+	/**
+	 * Main function
+	 * @param args
+	 */
 	public static void main(String[]args) {
-		
-//		JFrame window = new JFrame();		
+		//inputstream to get user input.
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-		//Read shit the shit
+		//Read the user input
 		System.out.print("Input the number of rows and columns: ");
 		int sides = readInt(reader);
 		
 		System.out.print("Maximum number of eggs per row/column/diagonal: ");
 		int max = readInt(reader);
 		System.out.println();
-/*
-		window.setSize(sides*50, sides*50);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setVisible(true);
-*/	
+
 		//Close the bufferedreader
 		try {
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		//Calling the Algorithm to do its magic.
 		Logic logic = new Logic(sides, max);
-		Board solution = logic.penisKuk();
+		Board solution = logic.saAlgorithm();
 		lamePrint(solution);
 	}
-	
+	/**
+	 * We was planning on creating a gui representarion but, but things took longer time than expected
+	 * @param solution
+	 */
 	public static void guiPrint(Board solution) {
 		//TODO
 	}
 	
+	/**
+	 * Prints out the board.
+	 */
 	public static void lamePrint(Board solution) {
 		boolean[][] s = solution.getArray();
 		for(int y=0; y<s.length; y++){
