@@ -149,6 +149,9 @@ public class Board implements Cloneable {
 		board[y][x] = !board[y][x];
 	}
 	
+	public int getMaxScore() {
+		return maxScore;
+	}
 	public boolean[][] getArray(){
 		return board;
 	}
