@@ -50,8 +50,8 @@ public class Logic {
 	
 	/**
 	 * Generates semi-random neighbors from the given board
-	 * @param b		The board the
-	 * @return
+	 * @param b		The board the neigbors will be generated from
+	 * @return		An ArrayList containing the neighbors
 	 */
 	public ArrayList<Board> getNeighbors(Board b) {
 		ArrayList<Board> neighbors = new ArrayList<Board>();
@@ -75,8 +75,7 @@ public class Logic {
 			}
 			neighbors.add(n);
 		}
-		return neighbors;
-		
+		return neighbors;	
 	}
 
 }
