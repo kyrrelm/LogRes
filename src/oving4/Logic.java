@@ -10,7 +10,8 @@ public class Logic {
 	
 	private int sides;
 	
-	private final int penaltyModifier = 1;
+	// The global values used.
+	private final int penaltyModifier = 3;
 	private final int dTemp = 1;
 	private final int tempMax = 500;
 	
@@ -20,7 +21,10 @@ public class Logic {
 		this.sides = sides;
 	}
 	
-	
+	/**
+	 * The Simmulated Annealing Algorithm!
+	 * @return	Returns the best board solution found.
+	 */
 	public Board saAlgorithm() {
 		Board current = board;
 		int temp = tempMax;
@@ -40,9 +44,9 @@ public class Logic {
 			double p = Math.min(1, Math.pow(Math.E, ((-q)/temp)));
 			double x = Math.random();
 			if(x>p)
-				current = pMax;
+				current = pMax;												//Exploiting
 			else 
-				current = neighbors.get(random.nextInt(neighbors.size()));
+				current = neighbors.get(random.nextInt(neighbors.size()));	//Exploring
 			temp = temp - dTemp;
 		}
 		return current;
