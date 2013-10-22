@@ -4,14 +4,15 @@ import java.io.Serializable;
 
 public class Board implements Cloneable {
 
+
 	
 	private final int lengthOfSides;
 	private final int maxNumberOfEggs;
 	private boolean[][] board;
 	private final int maxScore;
-	private final int penaltyModifier;
+	private final double penaltyModifier;
 
-	public Board(int lengthOfSides, int maxNumberOfEggs, int penaltyModifier){
+	public Board(int lengthOfSides, int maxNumberOfEggs, double penaltyModifier){
 		this.lengthOfSides = lengthOfSides;
 		this.maxNumberOfEggs = maxNumberOfEggs;
 		board = new boolean[lengthOfSides][lengthOfSides];
@@ -27,7 +28,7 @@ public class Board implements Cloneable {
 		return board[height][width];
 	}
 	public double evaluate() {
-		return (getNumberOfEggs()-calculateNumberOfFaults()*penaltyModifier)/maxNumberOfEggs;
+		return ((double)getNumberOfEggs()-(double)calculateNumberOfFaults()*penaltyModifier)/(double)maxScore;
 	}
 	private int getNumberOfEggs() {
 		int n = 0;
@@ -46,6 +47,10 @@ public class Board implements Cloneable {
 			if (!isColumnLegal(i))
 				numberOfFaults++;
 			if (!isRowLegal(i))
+				numberOfFaults++;
+			if (!isDiagonalLegalRightToLeft(0, i))
+				numberOfFaults++;
+			if (i > 0 && !isDiagonalLegalRightToLeft(i, board[0].length-1))
 				numberOfFaults++;
 		}
 		return numberOfFaults;
@@ -74,16 +79,32 @@ public class Board implements Cloneable {
 		}
 		return true;
 	}
-	public boolean isDiagonalLegal(int height, int width){
+	public boolean isDiagonalLegalRightToLeft(int height, int width){
+		int count = 0;
+		if(height == 0){
+			for (int i = 0; i <= width; i++) {
+				if(board[i][width-i])
+					count++;
+			}
+		}else{
+			for (int i = 0; i < board.length-height; i++) {
+				if (board[height+i][width-i]) {
+					count++;
+				}
+			}
+		}
+		if (count > 2)
+			return false;
 		return true;
-//		int count = 0;
-//		if(height == 0){
-//			for (int i = 0; i <= Math.min(height, width); i++) {
-//				if(board[i][width-i])
-//					count++;
-//			}
-//		}
-//		
+	}
+	public static void main(String[] args) {
+		Board b = new Board(5, 2, 2);
+		b.setEgg(3, 0, true);
+		b.setEgg(4, 1, true);
+		b.setEgg(0, 1, true);
+		b.setEgg(0, 3, true);
+		System.out.println(b.evaluate());
+	}
 //		int ii = width;
 //		int uu = height;
 //		if(height > width) {
@@ -100,7 +121,7 @@ public class Board implements Cloneable {
 //					return false;
 //				}
 //			}
-		}
+
 	
 	
 	public void invertEgg(int x, int y) {
