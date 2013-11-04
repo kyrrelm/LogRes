@@ -8,6 +8,7 @@ public class MinConflict {
 
 	private Board board;
 	private int maxSteps;
+	private int nmbOfIterations;
 	
 	public MinConflict(int maxSteps, Board boardWithInitialValues){
 		this.board = boardWithInitialValues;
@@ -20,6 +21,7 @@ public class MinConflict {
 		for (int i = 0; i <= maxSteps ; i++) {
 			board.updateSquares();
 			if(board.isSolved()){
+				nmbOfIterations = i;
 				System.out.println(""+i);
 				return true;
 			}
@@ -34,6 +36,12 @@ public class MinConflict {
 	}
 	public void printBoard(){
 		System.out.println(board.toString());
+	}
+	public Board getBoard() {
+		return this.board;
+	}
+	public int getNmbOfIterations(){
+		return nmbOfIterations;
 	}
 	
 }

@@ -25,10 +25,16 @@ public class Simulator {
 	}
 	
 	public void start() {
+		
+		long startTime = System.nanoTime();
 		mc = new MinConflict(10000, board);
 		if(mc.solve()){
+			long timeSpent = (long)((System.nanoTime()-startTime)/1000000);
 			System.out.println("Min-conflict was successful:");
-			mc.printBoard();
+			if(board.k < 35) {
+				GuiFrame f = new GuiFrame(board, timeSpent, mc.getNmbOfIterations());
+			} else
+				mc.printBoard();
 		}else{
 			System.out.println("Min-conflict was not successful, this is its best effort result:");
 			mc.printBoard();
