@@ -22,7 +22,7 @@ public class MinConflict {
 			board.updateSquares();
 			if(board.isSolved()){
 				nmbOfIterations = i;
-				System.out.println(""+i);
+				System.out.println("Number of iterations: "+i);
 				return true;
 			}
 			List<Square> queensInConflict = board.getQueensInConflict();

@@ -36,7 +36,7 @@ public class Simulator {
 			} else
 				mc.printBoard();
 		}else{
-			System.out.println("Min-conflict was not successful, this is its best effort result:");
+			System.out.println("Min-conflict was not successful, this is its last result:");
 			mc.printBoard();
 		}
 	}
