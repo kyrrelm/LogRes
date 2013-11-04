@@ -25,12 +25,12 @@ public class Simulator {
 	}
 	
 	public void start() {
-		mc = new MinConflict(10000, board);
+		mc = new MinConflict(100000, board);
 		if(mc.solve()){
 			System.out.println("Min-conflict was successful:");
 			mc.printBoard();
 		}else{
-			System.out.println("Min-conflict was not successful, this is its best effort result:");
+			System.out.println("Min-conflict was not successful, this is its last result:");
 			mc.printBoard();
 		}
 	}

@@ -20,7 +20,7 @@ public class MinConflict {
 		for (int i = 0; i <= maxSteps ; i++) {
 			board.updateSquares();
 			if(board.isSolved()){
-				System.out.println(""+i);
+				System.out.println("Number of iterations: "+i);
 				return true;
 			}
 			List<Square> queensInConflict = board.getQueensInConflict();
