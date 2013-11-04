@@ -1,13 +1,12 @@
 package oving5;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.PriorityQueue;
 
 public class Board {
-
+	//Size of the board.
 	public final int k;
-	
+	//the board.
 	private Square[][] board;
 	
 	public Board(int k) {
@@ -20,19 +19,27 @@ public class Board {
 			}
 		}
 	}
+
+	
 	/**
-	 * Returns the number of queens that are attacking the square
-	 * @param s
+	 * Returns the given square.
+	 * @param x	Position x
+	 * @param y	Position y
 	 * @return
 	 */
 	public Square getSquare(int x, int y){
 		return board[y][x];
 	}
 	
+	/**
+	 * Count how many queens that are attcking the square.
+	 * @param s		The square that the method is checking
+	 * @return		number of attacking queens.
+	 */
 	public int queensAttackingSquare(Square s) {
-		
+		//number of conflicts
 		int conflicts = 0;
-
+		//The squares X and Y position.
 		int sX = s.getPosX();
 		int sY = s.getPosY();
 		
@@ -47,6 +54,9 @@ public class Board {
 				if(sY != i)
 					conflicts++;
 			}
+			
+			if(i==0)
+				continue; //So that the queen isn't in attacking itself.
 			
 			//diagonals
 			if(!(sX+i>k)){ //Right
@@ -69,10 +79,13 @@ public class Board {
 		return conflicts;
 	}
 	
+	/**
+	 * Updates the number of queens attacking each square.
+	 */
 	public void updateSquares() {
 		for(Square[] s : board)
 			for(Square ss : s)
-				ss.setNumperOfConflicts(queensAttackingSquare(ss));
+				ss.setNumperOfQueensAttacking(queensAttackingSquare(ss));
 	}
 	
 	
@@ -81,21 +94,31 @@ public class Board {
 		
 		for(Square[] s : board)
 			for(Square ss : s)
-				if(ss.getNumperOfConflicts()>0)
+				if(ss.getNumperOfQueensAttacking()>0)
 					list.add(ss);
 		return list;
 	}
 	
-	
-	public PriorityQueue getOrderedQueueOfSquares() {
+	/**
+	 * Adds all squares to a PriorityQueue that places them in order after how many queens that's attacking it.
+	 * @return
+	 */
+	public PriorityQueue<Square> getOrderedQueueOfSquares() {
 		PriorityQueue<Square> list = new PriorityQueue<Square>();
 		
 		for(Square[] s : board)
 			for(Square ss : s) {
 				list.add(ss);
 			}
-		
 		return list;
+	}
+	
+	/**
+	 * Check to se if the "puzzle" is solved. By checking if there is any queeens attacking each other.
+	 * @return	if the puzzle is solved.
+	 */
+	public boolean isSolved() {	
+		return getQueensInConflict().size()==0;
 	}
 	
 }
