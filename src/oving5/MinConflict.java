@@ -29,11 +29,8 @@ public class MinConflict {
 		
 		return false;
 	}
-	public Board getBoard() {
-		return board;
-	}
 	public void printBoard(){
-		System.out.println(board);
+		System.out.println(board.toString());
 	}
 	
 }
