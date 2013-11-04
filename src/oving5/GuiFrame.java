@@ -1,5 +1,6 @@
 package oving5;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -23,7 +24,7 @@ public class GuiFrame {
 					l = new JLabel(new ImageIcon("images/queen.png"), JLabel.CENTER);
 				else
 					l = new JLabel(new ImageIcon("images/empty.png"), JLabel.CENTER);
-				l.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+				l.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				panel.add(l);
 			}
 		}
