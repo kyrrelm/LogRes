@@ -121,4 +121,22 @@ public class Board {
 		return getQueensInConflict().size()==0;
 	}
 	
+	/**
+	 * toString Method for printing.
+	 */
+	@Override
+	public String toString(){
+		String tmp = "";
+		for (int i = 0; i < k; i++) {
+			tmp += "\n";
+			for (int j = 0; j < k; j++) {
+				if(getSquare(j, k).isQueen())
+					tmp += "X";
+				else
+					tmp += "O";
+			}
+		}
+		return null;
+		
+	}
 }

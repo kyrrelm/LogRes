@@ -6,11 +6,12 @@ public class Square implements Comparable<Square> {
 	private final int posX;
 	private final int posY;
 	private int numperOfQueensAttacking;
-	
+
 	public Square(int posX, int posY){
 		
 		this.posX = posX;
 		this.posY = posY;
+		this.queen = false;
 	}
 
 	public boolean isQueen() {
