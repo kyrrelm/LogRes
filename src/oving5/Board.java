@@ -87,7 +87,7 @@ public class Board {
 	}
 	
 	
-	public PriorityQueue getOrderedListOfSquares() {
+	public PriorityQueue getOrderedQueueOfSquares() {
 		PriorityQueue<Square> list = new PriorityQueue<Square>();
 		
 		for(Square[] s : board)
