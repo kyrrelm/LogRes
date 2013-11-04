@@ -5,12 +5,13 @@ public class Square implements Comparable<Square> {
 	private boolean queen;
 	private final int posX;
 	private final int posY;
-	private int numperOfConflicts;
+	private int numberOfConflicts;
 	
 	public Square(int posX, int posY){
 		
 		this.posX = posX;
 		this.posY = posY;
+		this.queen = false;
 	}
 
 	public boolean isQueen() {
@@ -21,19 +22,19 @@ public class Square implements Comparable<Square> {
 		this.queen = queen;
 	}
 
-	public int getNumperOfConflicts() {
-		return numperOfConflicts;
+	public int getNumberOfConflicts() {
+		return numberOfConflicts;
 	}
 
 	public void setNumperOfConflicts(int numperOfConflicts) {
-		this.numperOfConflicts = numperOfConflicts;
+		this.numberOfConflicts = numperOfConflicts;
 	}
 
 	@Override
 	public int compareTo(Square o) {
-		if(this.numperOfConflicts > o.numperOfConflicts)
+		if(this.numberOfConflicts > o.numberOfConflicts)
 			return 1;
-		if(this.numperOfConflicts < o.numperOfConflicts)
+		if(this.numberOfConflicts < o.numberOfConflicts)
 			return -1;
 		return 0;
 	}
