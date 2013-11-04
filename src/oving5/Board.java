@@ -1,5 +1,6 @@
 package oving5;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -19,8 +20,16 @@ public class Board {
 			}
 		}
 	}
+	/**
+	 * Returns the number of queens that are attacking the square
+	 * @param s
+	 * @return
+	 */
+	public Square getSquare(int x, int y){
+		return board[y][x];
+	}
 	
-	public int checkSquare(Square s) {
+	public int queensAttackingSquare(Square s) {
 		
 		int conflicts = 0;
 
@@ -30,32 +39,62 @@ public class Board {
 		for(int i=0; i<k; i++){
 			//row
 			if(board[sY][i].isQueen()) {
-				if(s.getPosX() != i)
+				if(sX != i)
 					conflicts++;
 			}
 			//column
 			if(board[i][sX].isQueen()) {
-				if(s.getPosY() != i)
+				if(sY != i)
 					conflicts++;
 			}
+			
 			//diagonals
-			if(!(sX+i<k)){
-				if(!(sY+i<k)){
-				}
+			if(!(sX+i>k)){ //Right
+				if(!(sY+i>k))//down
+					if(board[sY+i][sX+i].isQueen())
+						conflicts++;
+				if(!(sY-i<0))//up
+					if(board[sY-i][sX+i].isQueen())
+						conflicts++;
+			}
+			if(!(sX-i<0)){//Left
+				if(!(sY-i<0))//up
+					if(board[sY-i][sX-i].isQueen())
+						conflicts++;
+				if(!(sY+i>k))//down
+					if(board[sY+i][sX-i].isQueen())
+						conflicts++;
 			}
 		}
-		
-		return -1;
+		return conflicts;
+	}
+	
+	public void updateSquares() {
+		for(Square[] s : board)
+			for(Square ss : s)
+				ss.setNumperOfConflicts(queensAttackingSquare(ss));
 	}
 	
 	
-	public List<Square> getQueensInConflict() {
-		return null;
+	public ArrayList<Square> getQueensInConflict() {
+		ArrayList<Square> list = new ArrayList<Square>();
+		
+		for(Square[] s : board)
+			for(Square ss : s)
+				if(ss.getNumperOfConflicts()>0)
+					list.add(ss);
+		return list;
 	}
 	
 	
 	public PriorityQueue getOrderedListOfSquares() {
 		PriorityQueue<Square> list = new PriorityQueue<Square>();
+		
+		for(Square[] s : board)
+			for(Square ss : s) {
+				list.add(ss);
+			}
+		
 		return list;
 	}
 	
