@@ -1,6 +1,7 @@
 package oving5;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class Board {
@@ -107,10 +108,18 @@ public class Board {
 	public PriorityQueue<Square> getOrderedQueueOfSquares() {
 		PriorityQueue<Square> list = new PriorityQueue<Square>();
 		
+		//For ranomizing
+		ArrayList<Square> temp = new ArrayList<Square>();
+		
 		for(Square[] s : board)
 			for(Square ss : s)
 				if(!ss.isQueen())
-					list.add(ss);
+					temp.add(ss);
+		
+		Collections.shuffle(temp);
+		
+		for(Square s : temp)
+			list.add(s);
 		return list;
 	}
 	
