@@ -59,8 +59,8 @@ public class Board {
 				continue; //So that the queen isn't in attacking itself.
 			
 			//diagonals
-			if(!(sX+i>k)){ //Right
-				if(!(sY+i>k))//down
+			if(!(sX+i>k-1)){ //Right
+				if(!(sY+i>k-1))//down
 					if(board[sY+i][sX+i].isQueen())
 						conflicts++;
 				if(!(sY-i<0))//up
@@ -71,7 +71,7 @@ public class Board {
 				if(!(sY-i<0))//up
 					if(board[sY-i][sX-i].isQueen())
 						conflicts++;
-				if(!(sY+i>k))//down
+				if(!(sY+i>k-1))//down
 					if(board[sY+i][sX-i].isQueen())
 						conflicts++;
 			}
