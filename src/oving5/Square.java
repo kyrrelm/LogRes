@@ -1,6 +1,6 @@
 package oving5;
 
-public class Square {
+public class Square implements Comparable<Square> {
 
 	private boolean queen;
 	private final int posX;
@@ -27,6 +27,15 @@ public class Square {
 
 	public void setNumperOfConflicts(int numperOfConflicts) {
 		this.numperOfConflicts = numperOfConflicts;
+	}
+
+	@Override
+	public int compareTo(Square o) {
+		if(this.numperOfConflicts > o.numperOfConflicts)
+			return 1;
+		if(this.numperOfConflicts < o.numperOfConflicts)
+			return -1;
+		return 0;
 	}
 	
 	
