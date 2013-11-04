@@ -7,12 +7,14 @@ public class Board implements Cloneable {
 
 	
 	private final int lengthOfSides;
-	private final int maxNumberOfQueens;
+	private final int maxNumberOfQueensPerLine;
 	private boolean[][] board;
+	private final int maxNumberOfQueens;
 
 	public Board(int lengthOfSides){
 		this.lengthOfSides = lengthOfSides;
-		this.maxNumberOfQueens = 1;
+		this.maxNumberOfQueens = lengthOfSides;
+		this.maxNumberOfQueensPerLine = 1;
 		board = new boolean[lengthOfSides][lengthOfSides];
 		
 		
@@ -72,7 +74,7 @@ public class Board implements Cloneable {
 				count++;
 			}
 		}
-		if (count > maxNumberOfQueens) {
+		if (count > maxNumberOfQueensPerLine) {
 			return false;
 		}
 		return true;
@@ -89,7 +91,7 @@ public class Board implements Cloneable {
 				count++;
 			}
 		}
-		if (count > maxNumberOfQueens) {
+		if (count > maxNumberOfQueensPerLine) {
 			return false;
 		}
 		return true;
@@ -114,7 +116,7 @@ public class Board implements Cloneable {
 				}
 			}
 		}
-		if(count > maxNumberOfQueens)
+		if(count > maxNumberOfQueensPerLine)
 			return true;
 		return true;
 	}
@@ -138,7 +140,7 @@ public class Board implements Cloneable {
 				}
 			}
 		}
-		if (count > maxNumberOfQueens)
+		if (count > maxNumberOfQueensPerLine)
 			return false;
 		return true;
 	}
