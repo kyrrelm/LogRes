@@ -130,7 +130,7 @@ public class Board {
 		for (int i = 0; i < k; i++) {
 			tmp += "\n";
 			for (int j = 0; j < k; j++) {
-				if(getSquare(j, i).isQueen())
+				if(getSquare(i, j).isQueen())
 					tmp += " X ";
 				else
 					tmp += " O ";

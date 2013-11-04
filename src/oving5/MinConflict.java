@@ -18,8 +18,11 @@ public class MinConflict {
 	public boolean solve(){
 		Random r = new Random();
 		for (int i = 0; i <= maxSteps ; i++) {
-			if(board.isSolved())
+			board.updateSquares();
+			if(board.isSolved()){
+				System.out.println(""+i);
 				return true;
+			}
 			List<Square> queensInConflict = board.getQueensInConflict();
 			PriorityQueue<Square> pq = board.getOrderedQueueOfSquares();
 
