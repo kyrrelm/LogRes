@@ -22,24 +22,41 @@ public class Board {
 	
 	public int checkSquare(Square s) {
 		
+		int conflicts = 0;
+
+		int sX = s.getPosX();
+		int sY = s.getPosY();
 		
-		//row
 		for(int i=0; i<k; i++){
-			board[]
+			//row
+			if(board[sY][i].isQueen()) {
+				if(s.getPosX() != i)
+					conflicts++;
+			}
+			//column
+			if(board[i][sX].isQueen()) {
+				if(s.getPosY() != i)
+					conflicts++;
+			}
+			//diagonals
+			if(!(sX+i<k)){
+				if(!(sY+i<k)){
+				}
+			}
 		}
 		
 		return -1;
 	}
 	
 	
-	public List<Square> GetQueensInConflict() {
+	public List<Square> getQueensInConflict() {
 		return null;
 	}
 	
 	
-	public List getOrderedListOfSquares() {
+	public PriorityQueue getOrderedListOfSquares() {
 		PriorityQueue<Square> list = new PriorityQueue<Square>();
-		return null;
+		return list;
 	}
 	
 }

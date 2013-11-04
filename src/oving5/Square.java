@@ -37,6 +37,14 @@ public class Square implements Comparable<Square> {
 			return -1;
 		return 0;
 	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
 	
 	
 }
