@@ -14,6 +14,7 @@ public class MinConflict {
 		
 		for (int i = 0; i <= maxSteps ; i++) {
 			
+			
 		}
 		
 		return null;
