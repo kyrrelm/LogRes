@@ -107,9 +107,9 @@ public class Board {
 		PriorityQueue<Square> list = new PriorityQueue<Square>();
 		
 		for(Square[] s : board)
-			for(Square ss : s) {
-				list.add(ss);
-			}
+			for(Square ss : s)
+				if(!ss.isQueen())
+					list.add(ss);
 		return list;
 	}
 	
