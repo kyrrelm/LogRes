@@ -94,8 +94,9 @@ public class Board {
 		
 		for(Square[] s : board)
 			for(Square ss : s)
-				if(ss.getNumperOfQueensAttacking()>0)
-					list.add(ss);
+				if(ss.isQueen())
+					if(ss.getNumperOfQueensAttacking()>0)
+						list.add(ss);
 		return list;
 	}
 	
