@@ -31,6 +31,15 @@ public class GuiFrame {
 		f.setSize(b.k*30+30, b.k*30+30);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+		
+		
+		//To get the frame to the front and gain focus.
+		int state = f.getExtendedState();
+		state &= ~JFrame.ICONIFIED;
+		f.setExtendedState(state);
+		f.setAlwaysOnTop(true);
+		f.toFront();
+		f.requestFocus();
+		f.setAlwaysOnTop(false);
 	}
-
 }

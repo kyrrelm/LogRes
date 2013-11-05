@@ -37,10 +37,10 @@ public class Simulator {
 		}
 		if(board.k < 35) {
 			GuiFrame f = new GuiFrame(board, timeSpent, mc.getNmbOfIterations());
-		} else
+		} else {
 			System.out.println("Time spent: " + timeSpent);
 			mc.printBoard();
-		
+		}
 	}
 	
 	
