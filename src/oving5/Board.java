@@ -3,6 +3,7 @@ package oving5;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
+import java.util.Random;
 
 public class Board {
 	//Size of the board.
@@ -92,6 +93,9 @@ public class Board {
 	
 	public ArrayList<Square> getQueensInConflict() {
 		ArrayList<Square> list = new ArrayList<Square>();
+		
+		Random r = new Random();
+		
 		
 		for(Square[] s : board)
 			for(Square ss : s)

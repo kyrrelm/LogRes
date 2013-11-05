@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 
 public class GuiFrame {
 	
-	public GuiFrame(Board b, long timeSpent, int iterations) {
+	public GuiFrame(Board b, long timeSpent, int iterations, String first) {
 		
-		final JFrame f = new JFrame("Results: "+timeSpent+"ms, over "+iterations+" Iterations");
+		final JFrame f = new JFrame(first + " "+timeSpent+"ms, over "+iterations+" Iterations");
 		JPanel panel = new JPanel(new GridLayout(b.k,b.k,0,0));
 		
 		for(int y=0; y<b.k; y++) {
