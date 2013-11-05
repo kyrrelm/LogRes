@@ -47,7 +47,6 @@ public class Simulator {
 			System.out.println("Time spent: " + timeSpent);
 			mc.printBoard();			
 		}
-		
 	}
 	
 	

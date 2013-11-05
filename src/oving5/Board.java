@@ -61,7 +61,7 @@ public class Board {
 				continue; //So that the queen isn't in attacking itself.
 			
 			//diagonals
-			if(!(sX+i>k-1)){ //Right
+			if(!(sX+i>k-1)){ //Right-
 				if(!(sY+i>k-1))//down
 					if(board[sY+i][sX+i].isQueen())
 						conflicts++;
@@ -69,7 +69,7 @@ public class Board {
 					if(board[sY-i][sX+i].isQueen())
 						conflicts++;
 			}
-			if(!(sX-i<0)){//Left
+			if(!(sX-i<0)){//Left-
 				if(!(sY-i<0))//up
 					if(board[sY-i][sX-i].isQueen())
 						conflicts++;
@@ -90,7 +90,10 @@ public class Board {
 				ss.setNumperOfQueensAttacking(queensAttackingSquare(ss));
 	}
 	
-	
+	/**
+	 * Returns alle the queens that have one or more queens attacking them.
+	 * @return
+	 */
 	public ArrayList<Square> getQueensInConflict() {
 		ArrayList<Square> list = new ArrayList<Square>();
 		
@@ -151,6 +154,5 @@ public class Board {
 			}
 		}
 		return tmp;
-		
 	}
 }
