@@ -28,17 +28,18 @@ public class Simulator {
 		
 		long startTime = System.nanoTime();
 		mc = new MinConflict(10000, board);
+		long timeSpent = 0;
 		if(mc.solve()){
-			long timeSpent = (long)((System.nanoTime()-startTime)/1000000);
+			timeSpent = (long)((System.nanoTime()-startTime)/1000000);
 			System.out.println("Min-conflict was successful:");
-			if(board.k < 35) {
-				GuiFrame f = new GuiFrame(board, timeSpent, mc.getNmbOfIterations());
-			} else
-				mc.printBoard();
 		}else{
 			System.out.println("Min-conflict was not successful, this is its last result:");
-			mc.printBoard();
 		}
+		if(board.k < 35) {
+			GuiFrame f = new GuiFrame(board, timeSpent, mc.getNmbOfIterations());
+		} else
+			mc.printBoard();
+		
 	}
 	
 	
